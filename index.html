@@ -1,0 +1,215 @@
+<html>
+  <head>  
+	<meta charset="UTF-8"> 
+    	<title>Diary</title>  
+	<link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="style.css" rel="stylesheet">
+	<script src="https://code.angularjs.org/1.4.4/angular.min.js"></script>
+	<!--<script src="https://code.angularjs.org/1.4.4/angular-mocks.js"></script>-->
+
+  </head>
+	<body ng-app="ngApp" class="ng-cloak">
+	<div class="generic-container" ng-controller="AppController">
+
+<!-- Toolbar -->
+	<nav class="navbar fixed-top navbar-light bg-light justify-content-between">
+ 		<a class="navbar-brand"></a>
+  		<form class="form-inline" name="myForm">
+    		  <button class="btn btn-outline-success my-2 my-sm-0 myForm" type="submit" data-toggle="modal" data-target="#myModalAdd" ng-click="reset()">Add post</button>
+  		</form>
+	</nav>
+<!-- Toolbar -->
+
+
+<!-- Sorting -->
+  <div class="panel panel-default">
+	<div class="panel-heading">
+		<form class="form-inline simple-form" name="myForm">
+			<span class="lead">Sort</span>&nbsp;
+			    <select class="form-control" name="sorting_param" id="sorting_param" ng-model="sort_posts.sorting_param">
+				      <option value="">--Choosing parameter--</option> 
+      				<option value="Title">Title</option>
+      				<option value="Date_Post">Date</option>
+				      <option value="Age">Age</option>
+    			</select>&nbsp;	
+			    <select class="form-control" name="sorting_mode" id="sorting_mode" ng-model="sort_posts.sorting_mode">
+				       <option value="">--Choosing mode--</option> 
+      				<option value="asc">Ascending</option>
+      				<option value="desc">Descending</option>
+    			</select>&nbsp;	
+    	<button class="btn btn-outline-success my-2 my-sm-0 myForm" ng-click="run_sort(sort_posts)" type="submit">OK</button>&nbsp;
+		  <button class="btn btn-outline-success my-2 my-sm-0 myForm" ng-click="reset_sort()" type="submit">Reset</button>
+		</form>
+	</div>
+	</div>
+<!-- Sorting -->
+
+
+<!-- Filtering -->	
+	<div class="panel panel-default">
+	<div class="panel-heading">
+		<form class="form-inline simple-form" name="myForm">
+			<span class="lead">Filter</span>&nbsp;
+			<input class="form-control" id="min_age" name="min_age" type="text" ng-model="filter_posts.min_age" placeholder="Min age" />&nbsp;
+			<input class="form-control" id="max_age" name="max_age" type="text" ng-model="filter_posts.max_age" placeholder="Max age" />&nbsp;
+			    <select class="form-control" name="gender" id="gender" ng-model="filter_posts.gender">
+				      <option value="">--Choosing gender--</option>
+      				<option value="M">Male</option>
+      				<option value="F">Female</option>
+    			</select>&nbsp;	
+    	<button class="btn btn-outline-success my-2 my-sm-0 myForm" ng-click="run_filter(filter_posts)" type="submit">OK</button>&nbsp;
+		  <button class="btn btn-outline-success my-2 my-sm-0 myForm" ng-click="reset_filter()" type="submit">Reset</button>
+		</form>
+	</div>
+	</div>
+<!-- Filtering -->
+	
+
+<!-- Cards -->
+	<div class="album py-5 bg-light">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4" ng-repeat="post in posts | filter:filterAge | filter: {'Gender': gender} | orderBy: sorting">
+              <div class="card mb-4 box-shadow">
+                <div class="card-body">
+		              <div class="d-flex justify-content-between">
+		  	            <small class="text-muted">{{post.Date_Post}}</small>
+		              </div></br>
+                  <p class="card-text align-items-center">{{post.Title}}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary btn_myform" ng-click="view(post.id)" data-toggle="modal" data-target="#myModalView">View</button>
+                    </div>
+                    <small class="text-muted">{{post.Gender}}, {{post.Age}}</small>
+                  </div>
+                </div>
+	           </div>
+            </div>
+           </div>
+	      </div>
+	</div>
+<!-- Cards -->
+	
+<!-- Modal View-->
+  <div class="modal fade" id="myModalView" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content justify-content-between">
+        <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+	        <h2 class="modal-title">{{post.Title}}</h2>
+	          <div class="tablecontainer">
+              <table class="table table-hover">
+                <tbody>
+                  <tr>
+                    <td><br><span ng-bind="post.Post"></span></td>
+                  </tr>
+                </tbody>
+              </table>
+             </div>
+	        <div class="tablecontainer">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Gender</th>
+			            <th>Age</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span ng-bind="post.Date_Post"></span></td>
+                  <td><span ng-bind="post.Gender"></span></td>
+			            <td><span ng-bind="post.Age"></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div> 
+    </div>
+  </div>
+<!-- Modal View-->
+
+<!-- Modal Add-->
+  <div class="modal fade" id="myModalAdd" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content justify-content-between">
+        <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+	        <h2 class="modal-title">Add new post</h2><br>   
+          <form name="myForm" class="form-horizontal">
+            <input type="hidden" ng-model="post.id" />
+            <p>{{greeting}}</p>
+            <div class="row">
+              <div class="form-group col-md-12">
+                <label class="col-md-2 control-lable" for="Title">Title</label>
+                  <div class="col-md-7">
+                    <input type="text" ng-model="post.Title" id="Title" name="Title" class="Title form-control input-sm" placeholder="Enter title for new post" required/>
+                      <div class="has-error" ng-show="myForm.$dirty">
+                        <span class="error_valid" ng-show="myForm.Title.$error.required">* </span>
+                        <span class="error_valid" ng-show="myForm.Title.$invalid">This field should not be empty</span>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-12">
+                <label class="col-md-2 control-lable" for="Post">Post</label>
+                  <div class="col-md-7">
+                    <textarea ng-model="post.Post" id="Post" name="Post" class="Post form-control" placeholder="Enter text of new post" required></textarea>
+                      <div class="has-error" ng-show="myForm.$dirty">
+                        <span class="error_valid" ng-show="myForm.Post.$error.required">* </span>
+                        <span class="error_valid" ng-show="myForm.Post.$invalid">This field should not be empty</span>
+                      </div>
+                  </div>
+              </div>
+            </div>
+		        <div class="row">
+              <div class="form-group col-md-12">
+                <label class="col-md-2 control-lable" for="Gender">Gender</label>
+                  <div class="col-md-7">
+                    <select ng-model="post.Gender" id="Gender" name="Gender" class="Gender form-control" required>
+                      <option value="">--Choosing gender--</option>
+                      <option value="M">Male</option>
+                      <option value="F">Female</option>
+                    </select>
+                    <div class="has-error" ng-show="myForm.$dirty">
+                      <span class="error_valid" ng-show="myForm.Gender.$error.required">* </span>
+                      <span class="error_valid" ng-show="myForm.Gender.$invalid">This field should not be empty</span>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-12">
+                <label class="col-md-2 control-lable" for="Age">Birthday</label>
+                  <div class="col-md-7"> 
+                    <input type="date" ng-model="post.Age" id="Age" name="Age" required max="{{today}}"/>
+                      <div class="has-error" ng-show="myForm.$dirty">
+                        <span class="error_valid" ng-show="myForm.Age.$error.required">* This field should not be empty</span>
+                        <span class="error_valid" ng-show="myForm.Age.$error.max">Your birthday should not be more than current date</span><br><br />
+                      </div>
+                  </div>
+              </div>
+            </div> 	
+	      </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" ng-click="reset()" ng-disabled="myForm.$pristine">Reset</button>
+	        <button type="button" class="btn btn-default" ng-click="submit()">Add</button>
+        </div>
+      </div> 
+    </div>
+  </div>
+<!-- Modal Add-->
+    
+	</div>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
+	<script src="app_controller.js"></script>
+</body>
+</html>
+
