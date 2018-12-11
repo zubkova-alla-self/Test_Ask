@@ -146,8 +146,6 @@ App.controller('AppController', ['$scope', 'Post', '$filter', '$http', function(
 
 	$scope.put = function (){
 		$scope.posts.push($scope.post);	
-		//$scope.data = $scope.posts;	
-		//$scope.createPost($scope.data);
 	};
 	
 	//sorting
