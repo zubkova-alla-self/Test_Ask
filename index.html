@@ -89,6 +89,7 @@
 	</div>
 <!-- Cards -->
 	
+    
 <!-- Modal View-->
   <div class="modal fade" id="myModalView" role="dialog">
     <div class="modal-dialog">
@@ -131,6 +132,7 @@
   </div>
 <!-- Modal View-->
 
+    
 <!-- Modal Add-->
   <div class="modal fade" id="myModalAdd" role="dialog">
     <div class="modal-dialog">
@@ -147,7 +149,7 @@
               <div class="form-group col-md-12">
                 <label class="col-md-2 control-lable" for="Title">Title</label>
                   <div class="col-md-7">
-                    <input type="text" ng-model="post.Title" id="Title" name="Title" class="Title form-control input-sm" placeholder="Enter title for new post" required/>
+                    <input type="text" ng-model="post.Title" id="Title" name="Title" class="Title form-control input-sm" placeholder="Enter title for new post" required />
                       <div class="has-error" ng-show="myForm.$dirty">
                         <span class="error_valid" ng-show="myForm.Title.$error.required">* </span>
                         <span class="error_valid" ng-show="myForm.Title.$invalid">This field should not be empty</span>
@@ -159,7 +161,7 @@
               <div class="form-group col-md-12">
                 <label class="col-md-2 control-lable" for="Post">Post</label>
                   <div class="col-md-7">
-                    <textarea ng-model="post.Post" id="Post" name="Post" class="Post form-control" placeholder="Enter text of new post" required></textarea>
+                    <textarea ng-model="post.Post" id="Post" name="Post" class="Post form-control" placeholder="Enter text of new post" required ></textarea>
                       <div class="has-error" ng-show="myForm.$dirty">
                         <span class="error_valid" ng-show="myForm.Post.$error.required">* </span>
                         <span class="error_valid" ng-show="myForm.Post.$invalid">This field should not be empty</span>
@@ -171,7 +173,7 @@
               <div class="form-group col-md-12">
                 <label class="col-md-2 control-lable" for="Gender">Gender</label>
                   <div class="col-md-7">
-                    <select ng-model="post.Gender" id="Gender" name="Gender" class="Gender form-control" required>
+                    <select ng-model="post.Gender" id="Gender" name="Gender" class="Gender form-control" required >
                       <option value="">--Choosing gender--</option>
                       <option value="M">Male</option>
                       <option value="F">Female</option>
