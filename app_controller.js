@@ -101,7 +101,7 @@ App.controller('AppController', ['$scope', 'Post', '$filter', '$http', function(
 
 			$scope.calculateAge = function calculateAge(birthday) {
     				var ageDifMs = Date.now() - birthday.getTime();
-    				var ageDate= new Date(ageDifMs);
+    				var ageDate = new Date(ageDifMs);
     				return Math.abs(ageDate.getUTCFullYear() - 1970);
 			}
 
@@ -109,8 +109,8 @@ App.controller('AppController', ['$scope', 'Post', '$filter', '$http', function(
 			$scope.post.Age = angular.copy($scope.calc_age);
 
 			for (var i = 0; i < $scope.posts.length; i++){
-			$scope.id_post = $scope.posts.length;
-			$scope.post.id = angular.copy($scope.id_post);
+				$scope.id_post = $scope.posts.length;
+				$scope.post.id = angular.copy($scope.id_post);
 			}
 			
   			$scope.greeting='Greeting! Your post is adding now!';
@@ -187,7 +187,7 @@ App.controller('AppController', ['$scope', 'Post', '$filter', '$http', function(
 	$scope.gender =$scope.filter_params.gender;
 	
 	$scope.filterAge = function(val) {
-  	return (val.Age > $scope.min_age && val.Age < $scope.max_age);
+  		return (val.Age > $scope.min_age && val.Age < $scope.max_age);
 	};
 
 	};
@@ -197,7 +197,7 @@ App.controller('AppController', ['$scope', 'Post', '$filter', '$http', function(
 		$scope.filter_posts = {min_age: null, max_age:null, gender:''};
 		$scope.filter_params = {min_age: null, max_age:null, gender:''};
 		$scope.filterAge = function(val) {
-  		return (val.Age > 0 && val.Age < 350);
+  			return (val.Age > 0 && val.Age < 350);
 		};
 		$scope.gender = '';
 		$scope.myForm.$setPristine();
