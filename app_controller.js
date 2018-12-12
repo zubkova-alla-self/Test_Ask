@@ -97,12 +97,11 @@ App.controller('AppController', ['$scope', 'Post', '$filter', '$http', function(
 		
 	$scope.submit = function(){
 		if ($scope.post.id === null){
-                        $scope.post.Date_Post = $filter('dateFilter')(new Date());
+          	$scope.post.Date_Post = $filter('dateFilter')(new Date());
 
-		
 			$scope.calculateAge = function calculateAge(birthday) {
     				var ageDifMs = Date.now() - birthday.getTime();
-    				var ageDate = new Date(ageDifMs);
+    				var ageDate= new Date(ageDifMs);
     				return Math.abs(ageDate.getUTCFullYear() - 1970);
 			}
 
