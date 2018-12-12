@@ -60,7 +60,6 @@ App.controller('AppController', ['$scope', 'Post', '$filter', '$http', function(
 	$scope.today = today.toISOString();
 
 	$scope.posts = data;
-	$scope.status = status;
 	
 	$scope.fetchAllPosts = function(){
 		Post.fetchAllPosts()
