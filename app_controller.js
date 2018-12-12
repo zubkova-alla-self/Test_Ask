@@ -100,9 +100,9 @@ App.controller('AppController', ['$scope', 'Post', '$filter', '$http', function(
           	$scope.post.Date_Post = $filter('dateFilter')(new Date());
 
 			$scope.calculateAge = function calculateAge(birthday) {
-    				var ageDifMs = Date.now() - birthday.getTime();
-    				var ageDate = new Date(ageDifMs);
-    				return Math.abs(ageDate.getUTCFullYear() - 1970);
+    			var ageDifMs = Date.now() - birthday.getTime();
+    			var ageDate = new Date(ageDifMs);
+    			return Math.abs(ageDate.getUTCFullYear() - 1970);
 			}
 
 			$scope.calc_age = $scope.calculateAge($scope.post.Age);
@@ -157,10 +157,14 @@ App.controller('AppController', ['$scope', 'Post', '$filter', '$http', function(
 	$scope.sort_mode = $scope.sort_params.sorting_mode;
 
 	if ($scope.sort_mode == 'asc'){
-			$scope.sorting=$scope.sort_param;
-		}else{
-			$scope.sorting='-'+$scope.sort_param;
-		}
+		$scope.sorting=$scope.sort_param;
+	};
+	if ($scope.sort_mode == 'desc'){
+		$scope.sorting='-'+$scope.sort_param;
+	};
+	if ($scope.sort_mode == ''){
+		$scope.sorting='';
+	};	
 	};
 
 
