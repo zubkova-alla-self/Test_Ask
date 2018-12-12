@@ -6,7 +6,7 @@ var App = angular.module('ngApp',[]);
 App.factory('Post', ['$http','$q', function($http,$q){
 	return {
 		fetchAllPosts: function(){
-			return $http.get('http://localhost:9999/index.html')
+			return $http.get('http://10.13.71.70:9999/index.html')
 			.then(
 				function(response){
 					if (response.status === 200){
@@ -21,7 +21,7 @@ App.factory('Post', ['$http','$q', function($http,$q){
 		},
 
 		createPost: function(post){
-			return $http.post('http://localhost:9999/index.html',post)
+			return $http.post('http://10.13.71.70:9999/index.html',post)
 			.then(
 				function(response){
 					if (response.status === 200){
