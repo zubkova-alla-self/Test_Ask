@@ -186,13 +186,28 @@ App.controller('AppController', ['$scope', 'Post', '$filter', '$http', function(
 	
    	$scope.run_filter = function(filter_posts) {
 	$scope.filter_params = angular.copy(filter_posts);
-	$scope.min_age = $scope.filter_params.min_age;
-	$scope.max_age = $scope.filter_params.max_age;
-	$scope.gender =$scope.filter_params.gender;
+	
+	if ($scope.filter_params.min_age == null){
+		$scope.min_age=0;
+	}else{
+		$scope.min_age = $scope.filter_params.min_age;
+	};
+	
+	if ($scope.filter_params.max_age == null){
+		$scope.max_age=350;
+	}else{
+		$scope.max_age = $scope.filter_params.max_age;
+	};
 	
 	$scope.filterAge = function(val) {
   		return (val.Age > $scope.min_age && val.Age < $scope.max_age);
 	};
+		
+	if ($scope.filter_params.gender == null){
+		$scope.gender == '';
+	}else{
+		$scope.gender =$scope.filter_params.gender;
+	};	
 
 	};
 
